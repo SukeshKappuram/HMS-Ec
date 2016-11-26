@@ -1,0 +1,20 @@
+Tables to be created
+==================
+
+create table Patients (Id Integer,firstName varchar2(30),lastName varchar2(30),mailId varchar2(30),ssn long,phone varchar2(10),Dob Date,gender varchar2(1),password varchar2(30),zipcode varchar2(7),height Float,weight float,status varchar2(10),trns_date date,CONSTRAINT patient_pk PRIMARY KEY (id))
+
+create table Doctors(Id Integer,firstName varchar2(30),lastName varchar2(30),mailId varchar2(30),ssn long,phone varchar2(10),Dob Date,gender varchar2(1),password varchar2(30),zipcode varchar2(7),NPI varchar2(16),PRACTICENAME varchar2(30),PRACTICETYpe varchar2(30),POSITION varchar2(30),status varchar2(10),trns_date date,CONSTRAINT doctor_pk PRIMARY KEY (id))
+
+create table APPOINTMENTS(Id Integer,appointmentDate date,PATIENTID int,DOCTORID int,problem varchar2(30),status varchar2(10),trns_date date,CONSTRAINT app_pk PRIMARY KEY (id))
+
+create table REPORTS(Id Integer,description varchar2(30),appointmentId Integer,fileName varchar2(30),status varchar2(10),trns_date date,CONSTRAINT report_pk PRIMARY KEY (id))
+
+create table HOSPITALS(Id Integer ,HospitalName varchar2(30),zipcode varchar2(30),ratings float,status varchar2(10),trns_date date,CONSTRAINT hospital_pk PRIMARY KEY (id))
+
+
+
+
+
+
+
+
