@@ -15,6 +15,10 @@ import java.util.Date;
 public class Patient extends User{
     private float height;
     private float weight;
+    
+    public Patient() {
+		// TODO Auto-generated constructor stub
+	}
 
     public Patient(String mailId, String password) {
         super(mailId, password);

@@ -102,7 +102,7 @@ public class UserDAOImpl implements UserDAO{
         ResultSet rs=ds.getSt().executeQuery("select * from Doctor where PracticeName like '%"+s+"%'");
         User u=null;
         while(rs.next()){
-            u=new Doctor(rs.getString("firstName"), rs.getString("lastName"), rs.getString("mailId"), 10001, rs.getString("phone"), rs.getDate("dob"), rs.getString("gender").charAt(0), "Doctor", rs.getString("zipcode"));
+            u=new Doctor(rs.getInt("id"),rs.getString("firstName"), rs.getString("lastName"), rs.getString("mailId"), 10001, rs.getString("phone"), rs.getDate("dob"), rs.getString("gender").charAt(0), "Doctor", rs.getString("zipcode"));
             doctorList.add(u);
         }
         ds.closeConnection();
@@ -169,6 +169,7 @@ public class UserDAOImpl implements UserDAO{
         if(rs.next()){
             u=new Patient(rs.getString("firstName"), rs.getString("lastName"), rs.getString("mailId"), 10001, rs.getString("phone"), rs.getDate("dob"), rs.getString("gender").charAt(0), "patient", rs.getString("zipcode"));
         }
+        u.setId(patientId);
         ds.closeConnection();
         return (Patient)u;
     }
@@ -180,6 +181,7 @@ public class UserDAOImpl implements UserDAO{
         if(rs.next()){
             u=new Doctor(rs.getString("firstName"), rs.getString("lastName"), rs.getString("mailId"), 10001, rs.getString("phone"), rs.getDate("dob"), rs.getString("gender").charAt(0), "Doctor", rs.getString("zipcode"));
         }
+        u.setId(doctorId);
         ds.closeConnection();
         return (Doctor)u;
     }

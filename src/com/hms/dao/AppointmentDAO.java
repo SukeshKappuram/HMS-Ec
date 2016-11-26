@@ -18,7 +18,7 @@ import java.util.List;
  * @author iamsu
  */
 public interface AppointmentDAO {
-    public void createAppointment();
+    public void createAppointment(Appointment appointment)throws ClassNotFoundException, SQLException;
     public int deleteAppointment();
     public List<Appointment> getAppointments(User user) throws SQLException,ClassNotFoundException ;
     public List<Hospital> getHospitals() throws SQLException, ClassNotFoundException;

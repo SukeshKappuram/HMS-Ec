@@ -17,6 +17,10 @@ public class Doctor extends User{
         private String practiceName;
         private String practiceType;
         private String position;
+        
+        public Doctor() {
+			// TODO Auto-generated constructor stub
+		}
 
     public Doctor(String mailId, String password) {
         super(mailId, password);
@@ -34,8 +38,6 @@ public class Doctor extends User{
         this.position = position;
     }
     
-    
-        
     public Doctor(long npi, String practiceName, String practiceType, String position, String firstName, String lastName, String mailId, long ssn, String phone, Date dob, char gender, String password, String role, String zipCode) {
         super(firstName, lastName, mailId, ssn, phone, dob, gender, password, role, zipCode);
         this.npi = npi;
@@ -44,7 +46,13 @@ public class Doctor extends User{
         this.position = position;
     }
         
-    public long getNpi() {
+    public Doctor(int id, String firstName, String lastName, String mailId, long ssn, String phone, Date dob,
+			char gender, String role, String zipCode) {
+		super(id, firstName, lastName, mailId, ssn, phone, dob, gender,  role, zipCode);
+		// TODO Auto-generated constructor stub
+	}
+
+	public long getNpi() {
         return npi;
     }
 

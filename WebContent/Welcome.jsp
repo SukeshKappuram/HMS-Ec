@@ -100,10 +100,10 @@
                 %>
                     <tr>
                         <c:if test="${user.role=='Patient'}">
-                            <td><a href='Appointment.do?app=<%=a.getId()%>'><%=a.getDoctor().getFirstName()%></a></td>
+                            <td><a href='Reports.do?app=<%=a.getId()%>'><%=a.getDoctor().getFirstName()%></a></td>
                         </c:if>
                         <c:if test="${user.role=='Doctor'}">
-                            <td><a href='Appointment.do?app=<%=a.getId()%>'><%=a.getPatient().getFirstName()%></a></td>
+                            <td><a href='Reports.do?app=<%=a.getId()%>'><%=a.getPatient().getFirstName()%></a></td>
                         </c:if>
                         <td><%=a.getAppointmentdate()%></td>
                         <td><%=a.getProblem()%></td>

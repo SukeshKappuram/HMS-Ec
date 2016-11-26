@@ -38,10 +38,10 @@
        </c:if>
         <div class="container">
             <h2>Appointment</h2>
-            <form>
+            <form action="Appointment.do">
                 <div class="form-group">
                     <label for="pur">Doctor</label>
-                    <select class="form-control" id="pur" placeholder="Doctor">
+                    <select class="form-control" id="pur" name="doctorId">
                         <option>Select Doctor</option>
                         <%
                             for(User u:ud.getDoctors(s)){
@@ -54,17 +54,18 @@
                         
                     </select>
                 </div>
+                <input type="text" value="${user.id}" name="patientId">
                 <div class="form-group">
                     <label for="dt">Date</label>
-                    <input type="date" class="form-control" id="dt" placeholder="Enter Date">
+                    <input type="date" class="form-control" id="dt" name="dt" placeholder="Enter Date">
                 </div>
                 <div class="form-group">
                     <label for="tm">Time</label>
-                    <input type="time" class="form-control" id="tm" placeholder="Enter Time">
+                    <input type="time" class="form-control" id="tm" name="tm" placeholder="Enter Time">
                 </div>
                 <div class="form-group">
                     <label for="res">Reason</label>
-                    <textarea class="form-control" id="res" placeholder="Reason" cols="30" rows="3"></textarea>
+                    <textarea class="form-control" id="res" placeholder="Reason" name="problem" cols="30" rows="3"></textarea>
                 </div>
                 <div class="checkbox">
                     <label><input type="checkbox"> Visited Previously</label>

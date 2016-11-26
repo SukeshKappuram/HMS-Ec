@@ -75,7 +75,7 @@
             for(Report a:ad.getReports(apps.getId())){
                 %>
                     <tr>
-                        <td><a href='Appointment.do?app=<%=a.getId()%>'><%=a.getAppintmentId()%></a></td>
+                        <td><a href='Report.do?app=<%=a.getId()%>'><%=a.getAppintmentId()%></a></td>
                         <td><%=a.getDescription()%></td>
                         <td><a href='assets/reports/<%=a.getFileName()%>'><%=a.getFileName()%></a></td>
                     </tr>

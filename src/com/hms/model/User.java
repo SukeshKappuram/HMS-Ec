@@ -56,8 +56,23 @@ public class User extends DomainObject{
         this.role = role;
         this.zipCode=zipCode;
     }
+    
+    public User(int id, String firstName, String lastName, String mailId, long ssn, String phone, Date dob, char gender,
+			 String role, String zipCode) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mailId = mailId;
+		this.ssn = ssn;
+		this.phone = phone;
+		this.dob = dob;
+		this.gender = gender;
+		this.role = role;
+		this.zipCode = zipCode;
+	}
 
-    public int getId() {
+	public int getId() {
         return id;
     }
 

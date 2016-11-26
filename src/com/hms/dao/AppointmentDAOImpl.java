@@ -13,6 +13,9 @@ import com.hms.model.Report;
 import com.hms.model.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +27,18 @@ public class AppointmentDAOImpl implements AppointmentDAO{
 
     DataSouce ds= new DataSouce();
     UserDAO ud=new UserDAOImpl();
+    DateFormat ndf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
     
     @Override
-    public void createAppointment() {
-        
+    public void createAppointment(Appointment appointment) throws ClassNotFoundException, SQLException {
+    	ds.createConnection();
+    	System.out.println(ds.getNewId("Appointments"));
+    	Statement st=ds.getSt();
+    	System.out.println(appointment.getAppointmentdate());
+    	System.out.println(appointment.getPatient());
+    	int x=st.executeUpdate("insert into Appointments values("+ds.getNewId("Appointments")+",TO_DATE('"+ndf.format(appointment.getAppointmentdate())+"','DD/MM/YYYY hh24:mi:ss'),"+appointment.getPatient().getId()+","+appointment.getDoctor().getId()+",'"+appointment.getProblem()+"','Active',sysdate)");
+    	System.out.println(x);
+    	ds.closeConnection();
     }
 
     @Override
