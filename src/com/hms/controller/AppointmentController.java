@@ -34,7 +34,15 @@ public class AppointmentController extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, ClassNotFoundException, SQLException, java.text.ParseException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out=response.getWriter();
+		String appId=request.getParameter("del");
+		try{
+			int apptId=Integer.parseInt(appId);
+			AppointmentDAO ad=new AppointmentDAOImpl();
+			ad.deleteAppointment(apptId);
+			response.sendRedirect("Welcome.jsp?app=y");
+		}catch(Exception e){}
 		UserDAO ud=new UserDAOImpl();
+		String appointmentId=request.getParameter("appId");
 		String doctorId=request.getParameter("doctorId");
         Doctor d=ud.getDoctor(Integer.parseInt(request.getParameter("doctorId")));
         String patientId=request.getParameter("patientId");
@@ -54,7 +62,16 @@ public class AppointmentController extends HttpServlet {
         }
         AppointmentDAO ad=new AppointmentDAOImpl();
         Appointment apt=new Appointment(appointmentdate, p, d, problem);
-        ad.createAppointment(apt);
+        try{
+        	out.print("HI "+appointmentId);
+        	if(!appointmentId.isEmpty()){out.print("There");
+        		ad.updateAppointment(Integer.parseInt(appointmentId), apt);
+        	}
+        }catch(Exception e){
+        	//out.print(e);
+        	ad.createAppointment(apt);
+        }
+        response.sendRedirect("Welcome.jsp?app=y");
 	}
 	
 	@Override

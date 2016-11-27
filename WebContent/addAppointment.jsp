@@ -31,7 +31,7 @@
     <body>
        <%@include file="Welcome.jsp" %>
        <%
-        String s="";
+        String s="",reson="";
        %>
        <c:if test="${not empty param.s}" >
            <% s=request.getParameter("s"); %>
@@ -39,7 +39,8 @@
         <div class="container">
             <h2>Appointment</h2>
             <form action="Appointment.do">
-                <div class="form-group">
+                  <c:if test="${empty param.edit}">
+                	<div class="form-group">
                     <label for="pur">Doctor</label>
                     <select class="form-control" id="pur" name="doctorId">
                         <option>Select Doctor</option>
@@ -51,10 +52,22 @@
                                 <%
                             }
                         %>
-                        
                     </select>
-                </div>
-                <input type="text" value="${user.id}" name="patientId">
+                	</div>
+                    </c:if>
+                    <c:if test="${not empty param.edit}">
+                       	<%
+                       		int appointmentId=Integer.parseInt(request.getParameter("edit"));
+                       		out.println(appointmentId);
+                       		Appointment app=ad.getAppointment(appointmentId);
+                       		out.println(app.getDoctor().getId());
+                       		reson=app.getProblem();
+                       	%>
+                       	<input type="hidden" value="<%=appointmentId%>" name="appId">
+                       	<input type="hidden" value="<%=app.getDoctor().getId()%>" name="doctorId">
+                       
+                    </c:if>
+                <input type="hidden" value="${user.id}" name="patientId">
                 <div class="form-group">
                     <label for="dt">Date</label>
                     <input type="date" class="form-control" id="dt" name="dt" placeholder="Enter Date">
@@ -65,7 +78,7 @@
                 </div>
                 <div class="form-group">
                     <label for="res">Reason</label>
-                    <textarea class="form-control" id="res" placeholder="Reason" name="problem" cols="30" rows="3"></textarea>
+                    <textarea class="form-control" id="res" placeholder="Reason" value="<%=reson%>" name="problem" cols="30" rows="3"></textarea>
                 </div>
                 <div class="checkbox">
                     <label><input type="checkbox"> Visited Previously</label>

@@ -42,8 +42,11 @@ public class AppointmentDAOImpl implements AppointmentDAO{
     }
 
     @Override
-    public int deleteAppointment() {
+    public int deleteAppointment(int appointmentId)throws ClassNotFoundException, SQLException {
         int deleted=0;
+        ds.createConnection();
+        deleted=ds.getSt().executeUpdate("delete from Appointments where id="+appointmentId);
+        ds.closeConnection();
         return 0;
     }
 
@@ -102,4 +105,18 @@ public class AppointmentDAOImpl implements AppointmentDAO{
         
          System.err.println(ad.getReports(1001));
      }
+
+	@Override
+	public void updateAppointment(int appointmentId, Appointment appointment) throws ClassNotFoundException, SQLException {
+		ds.createConnection();
+    	System.out.println(ds.getNewId("Appointments"));
+    	Statement st=ds.getSt();
+    	System.out.println(appointment.getAppointmentdate());
+    	System.out.println(appointment.getPatient());
+    	String SQL="update Appointments set appointmentdate=TO_DATE('"+ndf.format(appointment.getAppointmentdate())+"','DD/MM/YYYY hh24:mi:ss'),patientId="+appointment.getPatient().getId()+",doctorId="+appointment.getDoctor().getId()+",problem='"+appointment.getProblem()+"',status='Active' where id="+appointmentId;
+    	System.out.println(SQL);
+    	int x=st.executeUpdate(SQL);
+    	System.out.println(x);
+    	ds.closeConnection();
+	}
 }
