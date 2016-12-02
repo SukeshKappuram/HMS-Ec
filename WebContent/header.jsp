@@ -255,11 +255,11 @@ $('#search').bind('keyup', function(){
         <div class="header"> All Health !! 
             <small>
                 <br/>
-                <c:if test="${empty user}">
+                <c:if test="${empty user.firstName}">
                     <a href='index.jsp?r=Doctor'>I'm a doctor</a><br/>
                     <a href='index.jsp?r=Patient'>I'm a patient</a>
                 </c:if>
-                <c:if test="${not empty user}">
+                <c:if test="${not empty user.firstName}">
                     <a href='#'>Hi ${user.firstName} ${user.lastName} !!</a><br/>
                     <a href='logout.jsp'>Log Out</a>
                 </c:if>

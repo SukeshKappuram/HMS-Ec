@@ -32,7 +32,7 @@
         <div style="margin-left: 100px;">
         <form action="Authenticate" method="POST" target="_top">
             <fieldset>
-                <legend>${param.r} Login </legend>
+                <legend>${param.r} Login <small style="font-size: 10px;color: red;">${user.errorMessage}</small></legend>
                 <table align="center">
                     <tr>
                         <td><input type="text" name='mailId' placeholder="Login Id" required="required"/></td>

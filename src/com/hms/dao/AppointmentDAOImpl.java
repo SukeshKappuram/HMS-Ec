@@ -36,8 +36,10 @@ public class AppointmentDAOImpl implements AppointmentDAO{
     	Statement st=ds.getSt();
     	System.out.println(appointment.getAppointmentdate());
     	System.out.println(appointment.getPatient());
-    	int x=st.executeUpdate("insert into Appointments values("+ds.getNewId("Appointments")+",TO_DATE('"+ndf.format(appointment.getAppointmentdate())+"','DD/MM/YYYY hh24:mi:ss'),"+appointment.getPatient().getId()+","+appointment.getDoctor().getId()+",'"+appointment.getProblem()+"','Active',sysdate)");
-    	System.out.println(x);
+    	ResultSet rs=ds.getSt().executeQuery("select * from Appointments where date=TO_DATE('"+ndf.format(appointment.getAppointmentdate())+"','DD/MM/YYYY hh24:mi:ss') and patientId="+appointment.getPatient().getId());
+    	if(rs.next()){
+    		int x=st.executeUpdate("insert into Appointments values("+ds.getNewId("Appointments")+",TO_DATE('"+ndf.format(appointment.getAppointmentdate())+"','DD/MM/YYYY hh24:mi:ss'),"+appointment.getPatient().getId()+","+appointment.getDoctor().getId()+",'"+appointment.getProblem()+"','Active',sysdate)");
+    	}
     	ds.closeConnection();
     }
 

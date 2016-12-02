@@ -59,7 +59,7 @@ public class AuthenticationController extends HttpServlet {
         String role=request.getParameter("role");
         UserDAO ud=new UserDAOImpl();
         User u=null;
-        RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
+        RequestDispatcher rd=request.getRequestDispatcher("index.jsp?r="+role);
         if(referer.contains("index")){
             if(role.equals("Doctor")){
                 u=new Doctor(mailId, password);
@@ -69,8 +69,8 @@ public class AuthenticationController extends HttpServlet {
             }
             u.setRole(role);
             ud.verifyUser(u);
+            session.setAttribute("user", ud.getUser());
              if(ud.isValidUser()){
-                 session.setAttribute("user", ud.getUser());
                  out.println("<script>alert('Login Successfull!!!');</script>");
                  rd=request.getRequestDispatcher("Welcome.jsp?app=y");
              }
@@ -125,10 +125,10 @@ public class AuthenticationController extends HttpServlet {
         if(!ud.isValidUser()){
             out.print(u.getErrorCode() +" :: "+u.getErrorMessage());
         }
-        rd.include(request, response);
+        rd.forward(request, response);
         }catch(Exception e){
-           out.println(e);
-           //response.sendRedirect("index.jsp");
+           //out.println(e);
+           response.sendRedirect("index.jsp");
         }
         
     }

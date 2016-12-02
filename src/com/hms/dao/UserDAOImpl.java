@@ -116,11 +116,11 @@ public class UserDAOImpl implements UserDAO{
             ds.createConnection();
             ResultSet rs=ds.getSt().executeQuery("select * from "+table+" where mailId = '"+user.getMailId()+"'");
             user.setErrorCode("404");
-            user.setErrorMessage(table);
+            user.setErrorMessage("Invalid LoginId");
             if(rs.next()){
                 byte[] ssn=rs.getBytes("ssn");
                 user.setErrorCode("404");
-                user.setErrorMessage("Record Found");
+                user.setErrorMessage("Invalid Password");
                 if(rs.getString("password").equals(user.getPassword())){
                     user.setErrorMessage("Password Matched");
                     user.setId(rs.getInt("Id"));
@@ -146,9 +146,9 @@ public class UserDAOImpl implements UserDAO{
                         p.setWeight(rs.getFloat("weight"));
                     }
                     isValidUser=true;
-                    this.user=user;
                 }
             }
+            this.user=user;
             ds.closeConnection();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
